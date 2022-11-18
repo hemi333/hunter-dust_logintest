@@ -1,6 +1,7 @@
 const passport = require("passport");
-const NaverStrategy = require("passport-naver").Strategy;
+const { Strategy: NaverStrategy, Profile: NaverProfile } = require("passport-naver-v2");
 const { User } = require("../models");
+
 require("dotenv").config();
 
 module.exports = (app) => {
@@ -13,11 +14,11 @@ module.exports = (app) => {
         callbackURL: process.env.NAVER_CALLBACK_URL,
       },
       async (accessToken, refreshToken, profile, done) => {
-        console.log("naver profile : ", accessToken, profile);
+        console.log("naver profile : ", profile);
         try {
           const exUser = await User.findOne({
             // 네이버 플랫폼에서 로그인 했고 & snsId필드에 네이버 아이디가 일치할경우
-            where: { snsId: profile.id, provider: "naver" },
+            where: { snsId: profile.id },
           });
           // 이미 가입된 네이버 프로필이면 성공
           if (exUser) {
@@ -28,6 +29,7 @@ module.exports = (app) => {
               email: profile.email,
               nickname: profile.name,
               snsId: profile.id,
+              userImageURL: profile.profileImage,
               provider: "naver",
             });
             done(null, newUser);

@@ -21,6 +21,9 @@ module.exports = {
       nickname: {
         type: Sequelize.STRING,
       },
+      userImageURL: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
