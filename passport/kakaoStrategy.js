@@ -33,7 +33,7 @@ module.exports = (app) => {
               email: profile._json && profile._json.kakao_account_email,
               nickname: profile.displayName,
               snsId: profile.id,
-              // userImageURL: profile._json.properties.thumbnail_image,
+              userImageURL: profile._json.properties.profile_image,
               provider: "kakao",
             });
             done(null, newUser); // 회원가입하고 로그인 인증 완료
