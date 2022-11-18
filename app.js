@@ -4,10 +4,14 @@ const cors = require("cors");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const kakaoPassport = require("./passport/kakaoStrategy");
+const naverPassport = require("./passport/naverStrategy");
 
 const indexRouter = require("./routes/index");
 
 const app = express();
+kakaoPassport(app);
+naverPassport(app);
 
 const { sequelize } = require("./models/index");
 sequelize

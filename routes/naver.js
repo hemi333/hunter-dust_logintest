@@ -11,10 +11,10 @@ const naverCallback = (req, res, next) => {
   passport.authenticate("naver", { failureRedirect: "/" }, (err, user, info) => {
     if (err) return next(err);
 
-    const authId = user._id;
+    const userId = user.authId;
     const userInfo = user;
 
-    const token = jwt.sign({ authId }, process.env.secretKey);
+    const token = jwt.sign({ userId }, process.env.secretKey);
     result = {
       token,
       userInfo, //이메일,프로필사진,닉네임

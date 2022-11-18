@@ -1,9 +1,10 @@
 const passport = require("passport");
-const { Strategy: NaverStrategy, Profile: NaverProfile } = require("passport-naver-v2");
+const NaverStrategy = require("passport-naver").Strategy;
+const { User } = require("../models");
+require("dotenv").config();
 
-const User = require("../models/user");
-
-module.exports = () => {
+module.exports = (app) => {
+  app.use(passport.initialize()); // passport를 초기화 하기 위해서 passport.initialize 미들웨어 사용
   passport.use(
     new NaverStrategy(
       {
@@ -38,4 +39,10 @@ module.exports = () => {
       }
     )
   );
+  passport.serializeUser((user, done) => {
+    done(null, user);
+  });
+  passport.deserializeUser((user, done) => {
+    done(null, user);
+  });
 };

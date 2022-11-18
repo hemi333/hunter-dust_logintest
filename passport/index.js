@@ -16,7 +16,7 @@ module.exports = () => {
   });
 
   local();
-  naver(); // 네이버 전략 등록
+  naver();
 };
 
 module.exports = () => {
@@ -32,5 +32,5 @@ module.exports = () => {
   });
 
   local();
-  kakao(); // 구글 전략 등록
+  kakao();
 };
