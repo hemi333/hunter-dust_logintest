@@ -1,5 +1,4 @@
 const passport = require("passport");
-const local = require("./localStrategy"); // 로컬서버로 로그인할때
 const naver = require("./naverStrategy"); // 네이버서버로 로그인할때
 const kakao = require("./kakaoStrategy"); // 카카오서버로 로그인할때
 

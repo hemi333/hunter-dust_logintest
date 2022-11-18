@@ -1,9 +1,14 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+const naverRouter = require("./naver");
+const kakaoRouter = require("./kakao");
+
+router.get("/", (req, res) => {
+  res.status(200).json({ massage: "서버 정상" });
 });
+
+router.use("/kakao", kakaoRouter);
+router.use("/naver", naverRouter);
 
 module.exports = router;

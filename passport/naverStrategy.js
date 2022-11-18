@@ -12,7 +12,7 @@ module.exports = () => {
         callbackURL: process.env.NAVER_CALLBACK_URL,
       },
       async (accessToken, refreshToken, profile, done) => {
-        console.log("naver profile : ", profile);
+        console.log("naver profile : ", accessToken, profile);
         try {
           const exUser = await User.findOne({
             // 네이버 플랫폼에서 로그인 했고 & snsId필드에 네이버 아이디가 일치할경우
@@ -25,7 +25,7 @@ module.exports = () => {
             // 가입되지 않는 유저면 회원가입 시키고 로그인을 시킨다
             const newUser = await User.create({
               email: profile.email,
-              nick: profile.name,
+              nickname: profile.name,
               snsId: profile.id,
               provider: "naver",
             });
